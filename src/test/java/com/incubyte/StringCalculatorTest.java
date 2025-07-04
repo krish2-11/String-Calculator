@@ -39,4 +39,14 @@ public class StringCalculatorTest {
         // Test for one number output
         assertEquals(1, result, "Empty string should return 0");
     }
+
+    @Test
+    public void should_returnSum_when_twoCommaSeparatedNumbers() {
+
+        // Getting result from add() method with one number
+        int result = calculator.add("1,20");
+
+        // Test for one number output
+        assertEquals(21, result, "Empty string should return 0");
+    }
 }
