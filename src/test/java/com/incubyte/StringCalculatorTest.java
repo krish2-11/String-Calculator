@@ -29,4 +29,14 @@ public class StringCalculatorTest {
         // Test for empty string output
         assertEquals(0, result, "Empty string should return 0");
     }
+
+    @Test
+    public void should_returnSameNumber_when_singleNumberGiven() {
+
+        // Getting result from add() method with one number
+        int result = calculator.add("1");
+
+        // Test for one number output
+        assertEquals(1, result, "Empty string should return 0");
+    }
 }
