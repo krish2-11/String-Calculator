@@ -3,6 +3,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
 
@@ -76,7 +77,16 @@ public class StringCalculatorTest {
         // Getting result from add() method with custom deliminator number
         int result = calculator.add("//;\n1;2");
 
-        // Test for unknown number output
+        // Test for custom deliminator output
         assertEquals(3, result, "It should return sum of multiple number");
+    }
+
+    @Test
+    public void should_throwException_when_negativeNumbersGiven() {
+
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add("1,-2,3,-5");
+        });
+        assertEquals("negatives not allowed -2,-5", thrown.getMessage());
     }
 }

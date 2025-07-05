@@ -1,6 +1,8 @@
 package com.incubyte;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
@@ -8,10 +10,11 @@ public class StringCalculator {
 
     }
 
-    int add(String number){
+    int add(String number) {
         if (number.isEmpty()) return 0;
 
         String delimiter = "[,\n]";
+        ArrayList<Integer> negatives = new ArrayList<>();
 
         // Check for custom delimiter
         if (number.startsWith("//")) {
@@ -27,10 +30,17 @@ public class StringCalculator {
         int sum = 0;
         for (String num : numbers) {
             if (!num.isEmpty()) {
-                sum += Integer.parseInt(num.trim());
+                int numberAtEachIndex =  Integer.parseInt(num.trim());
+                if(numberAtEachIndex < 0){
+                    negatives.add(numberAtEachIndex) ;
+                }
+                sum += numberAtEachIndex;
             }
         }
 
+        if(!negatives.isEmpty()){
+            throw new IllegalArgumentException("negative numbers are not allowed: " + negatives);
+        }
         return sum;
     }
 }
