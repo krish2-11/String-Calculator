@@ -12,7 +12,7 @@ public class StringCalculator {
 
         String[] numbers = number.split(","); // Handling for one or two number
 
-        // Return sum of all , separated number
-        return Arrays.stream(numbers).map(Integer::parseInt).reduce(0 , Integer::sum);
+        // Return sum of two ' , ' separated number
+        return Arrays.stream(numbers).map(String::trim).map(Integer::parseInt).reduce(0 , Integer::sum);
     }
 }

@@ -37,16 +37,26 @@ public class StringCalculatorTest {
         int result = calculator.add("1");
 
         // Test for one number output
-        assertEquals(1, result, "Empty string should return 0");
+        assertEquals(1, result, "one number string should return same number");
     }
 
     @Test
     public void should_returnSum_when_twoCommaSeparatedNumbers() {
 
-        // Getting result from add() method with one number
+        // Getting result from add() method with two number
         int result = calculator.add("1,20");
 
-        // Test for one number output
-        assertEquals(21, result, "Empty string should return 0");
+        // Test for two number output
+        assertEquals(21, result, "two number string should return sum of two number");
+    }
+
+    @Test
+    public void should_returnSum_when_multipleNumbersGiven() {
+
+        // Getting result from add() method with unknown number
+        int result = calculator.add("0 ,20, 13,7");
+
+        // Test for unknown number output
+        assertEquals(40, result, "It should return sum of multiple number");
     }
 }
