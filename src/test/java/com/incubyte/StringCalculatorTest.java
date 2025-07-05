@@ -59,4 +59,14 @@ public class StringCalculatorTest {
         // Test for unknown number output
         assertEquals(40, result, "It should return sum of multiple number");
     }
+
+    @Test
+    public void should_handleNewlinesAsDelimiters() {
+
+        // Getting result from add() method with \n deliminator number
+        int result = calculator.add("21\n,20, 13,7");
+
+        // Test for unknown number output
+        assertEquals(61, result, "It should return sum of multiple number");
+    }
 }
