@@ -1,40 +1,36 @@
 package com.incubyte;
 
 
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     public static void main(String[] args) {
 
     }
 
     int add(String number){
-        if(number.isEmpty()) return 0;              // Handling cases for empty string
+        if (number.isEmpty()) return 0;
 
-        int sum = 0;               // Variable to accumulate the sum of numbers
-        StringBuilder currentNumber = new StringBuilder();    // String to accumulate characters for the current number
+        String delimiter = "[,\n]";
 
-        // Loop through each character in the input string
-        for (int i = 0; i < number.length(); i++) {
-            char character = number.charAt(i);
+        // Check for custom delimiter
+        if (number.startsWith("//")) {
+            int delimiterIndex = number.indexOf("\n");
+            String customDelimiter = number.substring(2, delimiterIndex);
+            delimiter = Pattern.quote(customDelimiter);  // Escape special regex chars
+            number = number.substring(delimiterIndex + 1);
+        }
 
-            // If the current character is a comma, process the current number
-            if (character == ',' || character == '\n') {
-                if (!currentNumber.isEmpty()) {
-                    // Convert the accumulated string to an integer, trim whitespace, and add to the sum
-                    sum += Integer.parseInt(currentNumber.toString().trim());
-                    currentNumber = new StringBuilder();  // Reset currentNumber for the next number
-                }
-            } else {
-                // Accumulate characters to form the current number
-                currentNumber.append(character);
+        // Split numbers using the delimiter regex
+        String[] numbers = number.split(delimiter);
+
+        int sum = 0;
+        for (String num : numbers) {
+            if (!num.isEmpty()) {
+                sum += Integer.parseInt(num.trim());
             }
         }
 
-        // After the loop, handle the last number (if there's any left)
-        if (!currentNumber.isEmpty()) {
-            sum += Integer.parseInt(currentNumber.toString().trim(), 10);
-        }
-
-        // Return the final sum of all numbers
         return sum;
     }
 }
